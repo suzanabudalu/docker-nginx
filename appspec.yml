@@ -1,17 +1,14 @@
-version: 0.0
-os: linux
-files:
-  - source: /index.html
-    destination: /var/www/html/
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies
-      timeout: 300
-      runas: root
-    - location: scripts/start_server
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: root
+```
+cat > docker-compose.yml << __EOF__
+version: "3.3"
+services:
+  web:
+    build:
+      context: ./my-nginx/
+      args:
+        ENABLED_MODULES: ndk lua
+    image: my-nginx-with-lua:v1
+    ports:
+      - "80:8000"
+__EOF__
+```
