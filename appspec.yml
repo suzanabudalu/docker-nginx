@@ -1,14 +1,9 @@
 version: '3.8'
 
 services:
-  nginx:
-    build:
-      context: https://github.com/suzanabudalu/docker-nginx.git
-      dockerfile: Dockerfile
+  web:
+    image: nginx:latest
     ports:
       - 80:80
     volumes:
-      - ./nginx-conf:/etc/nginx/conf.d
-      - ./html:/usr/share/nginx/html
-
-
+      - ./web-content:/usr/share/nginx/html
