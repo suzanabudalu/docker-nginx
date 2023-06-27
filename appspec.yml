@@ -1,14 +1,14 @@
-```
-cat > docker-compose.yml << __EOF__
-version: "3.3"
+version: '3.8'
+
 services:
-  web:
+  nginx:
     build:
-      context: ./my-nginx/
-      args:
-        ENABLED_MODULES: ndk lua
-    image: my-nginx-with-lua:v1
+      context: https://github.com/suzanabudalu/docker-nginx.git
+      dockerfile: Dockerfile
     ports:
-      - "80:8000"
-__EOF__
-```
+      - 80:80
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./html:/usr/share/nginx/html
+
+
