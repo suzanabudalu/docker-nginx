@@ -5,10 +5,14 @@ files:
     destination: /usr/share/nginx/html
 hooks:
   BeforeInstall:
-    - location: scripts/install_dependencies.sh
+    - location: scripts
       timeout: 300
       runas: root
+      commands:
+        - apt-get update
   ApplicationStop:
-    - location: scripts/stop_server.sh
+    - location: scripts
       timeout: 60
       runas: root
+      commands:
+        - service nginx stop
