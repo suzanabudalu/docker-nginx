@@ -1,18 +1,14 @@
 version: 0.0
 os: linux
-files:
-  - source: /
-    destination: /usr/share/nginx/html
 hooks:
   BeforeInstall:
-    - location: scripts
-      timeout: 300
+    - location: scripts/install_dependencies
+      timeout: 3000
       runas: root
-      commands:
-        - apt-get update
+    - location: scripts/start_server
+      timeout: 3000
+      runas: root
   ApplicationStop:
-    - location: scripts
-      timeout: 60
+    - location: scripts/stop_server
+      timeout: 3000
       runas: root
-      commands:
-        - service nginx stop
